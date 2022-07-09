@@ -19,8 +19,17 @@
             app:popupTheme="@style/Theme.AndroidStudy.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
+        <include layout="@layout/fragment_main" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/topPageFragment"
+        android:name="com.example.androidstudy.SampleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -30,5 +39,9 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
         app:srcCompat="@android:drawable/ic_dialog_email" />
+
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
