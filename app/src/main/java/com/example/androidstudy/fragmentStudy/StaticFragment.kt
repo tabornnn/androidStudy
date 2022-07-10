@@ -1,4 +1,4 @@
-package com.example.androidstudy
+package com.example.androidstudy.fragmentStudy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.androidstudy.R
 
-class SwitchFragment : Fragment() {
-    companion object {
-        fun newInstance(str: String?): Fragment? {
-            // Fragemnt01 インスタンス生成
-            val fragment = SwitchFragment()
-            // Bundle にパラメータを設定
-            val barg = Bundle()
-            barg.putString("Message", str)
-            fragment.setArguments(barg)
-            return fragment
-        }
-    }
-
+class StaticFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,9 +16,11 @@ class SwitchFragment : Fragment() {
     ): View? {
         //LayoutInfrater にFragmentのレイアウトをinflate(挿入)
         val view : View = inflater.inflate(
-            R.layout.fragment_switch,
+            R.layout.fragment_static,
             container, false
         )
+        val textView : TextView = view.findViewById(R.id.static_fragment)
+        textView.setText("staticに生成したfragment")
         return view
     }
 }

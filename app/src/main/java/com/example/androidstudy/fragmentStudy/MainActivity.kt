@@ -1,4 +1,4 @@
-package com.example.androidstudy
+package com.example.androidstudy.fragmentStudy
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.androidstudy.R
 
 
 class MainActivity : AppCompatActivity() {
