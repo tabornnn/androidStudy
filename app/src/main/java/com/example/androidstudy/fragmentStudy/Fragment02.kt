@@ -34,7 +34,7 @@ class Fragment02 : Fragment() {
     ): View? {
         //LayoutInfrater にFragmentのレイアウトをinflate(挿入)
         val view : View = inflater.inflate(
-            R.layout.fragment_02,
+            R.layout.fragment_fromto02,
             container, false
         )
         return view
