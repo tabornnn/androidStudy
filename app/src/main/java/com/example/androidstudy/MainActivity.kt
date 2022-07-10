@@ -1,58 +1,76 @@
 package com.example.androidstudy
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import android.view.MenuItem
-import com.example.androidstudy.databinding.ActivityMainBinding
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    /**
+     * bindingについての基礎知識
+     * https://codeforfun.jp/android-studio-how-to-use-view-binding-with-kotlin/
+     * actiity_main.xml → ActivityMain + Binding → ActivityMainBinding
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val button: Button = findViewById(R.id.switch_button)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        if (savedInstanceState == null) {
+            /**
+             * fragmentをdynamic生成する処理
+             */
+            // FragmentManagerのインスタンス生成
+            val fragmentManager: FragmentManager = supportFragmentManager
+            // FragmentTransactionのインスタンスを取得
+            val dynamicFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            // インスタンスに対して張り付け方を指定する
+            dynamicFragmentTransaction.replace(R.id.dynamic_container, DynamicFragment())
+            dynamicFragmentTransaction.commit()
 
-        setSupportActionBar(binding.toolbar)
+            /**
+             * ボタン押下によって、fragmentに遷移する処理
+             */
+            button.setOnClickListener { v ->
+                // FragmentTransactionのインスタンスを取得
+                val switchFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+                // BackStackを設定
+                switchFragmentTransaction.addToBackStack(null)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                // パラメータを設定
+                SwitchFragment.newInstance("Fragment")?.let {
+                    switchFragmentTransaction.replace(
+                        R.id.switch_container,
+                        it
+                    )
+                }
+                switchFragmentTransaction.commit()
+            }
+            /**
+             * fragment間で遷移させるための処理
+             */
+            val fromToFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            // counterをパラメータとして設定
+            var count: Int = 0
+            Fragment01.newInstance(count)
+                ?.let {
+                    fromToFragmentTransaction.replace(R.id.fromTo_fragments_container, it) }
+            // 張り付けを実行
+            fromToFragmentTransaction.commit()
         }
     }
 
+    // アプリのメニューを表示させる
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
 }
