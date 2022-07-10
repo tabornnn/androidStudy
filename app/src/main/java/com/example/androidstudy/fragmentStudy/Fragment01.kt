@@ -1,7 +1,6 @@
-package com.example.androidstudy
+package com.example.androidstudy.fragmentStudy
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.androidstudy.R
 
 class Fragment01 : Fragment() {
 
@@ -33,7 +33,7 @@ class Fragment01 : Fragment() {
     ): View? {
         //LayoutInfrater にFragmentのレイアウトをinflate(挿入)
         val view : View = inflater.inflate(
-            R.layout.fragment_01,
+            R.layout.fragment_fromto01,
             container, false
         )
         return view
