@@ -1,16 +1,12 @@
 package com.example.androidstudy
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.androidstudy.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,11 +18,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // 破棄からのActivity復元を試みている
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        if (savedInstanceState == null) {
+            // FragmentManagerのインスタンス生成
+            val fragmentManager: FragmentManager = supportFragmentManager
+
+            // FragmentTransactionのインスタンスを取得
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+            // インスタンスに対して張り付け方を指定する
+            fragmentTransaction.replace(R.id.container, DynamicFragment())
+
+            // 張り付けを実行
+            fragmentTransaction.commit()
+        }
     }
 
     // アプリのメニューを表示させる
