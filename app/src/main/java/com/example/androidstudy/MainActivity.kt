@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
+
 class MainActivity : AppCompatActivity() {
 
     /**
@@ -21,32 +22,47 @@ class MainActivity : AppCompatActivity() {
         val button: Button = findViewById(R.id.switch_button)
 
         if (savedInstanceState == null) {
+            /**
+             * fragmentをdynamic生成する処理
+             */
             // FragmentManagerのインスタンス生成
             val fragmentManager: FragmentManager = supportFragmentManager
             // FragmentTransactionのインスタンスを取得
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            val dynamicFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
             // インスタンスに対して張り付け方を指定する
-            fragmentTransaction.replace(R.id.dynamic_container, DynamicFragment())
-            // 張り付けを実行
-            fragmentTransaction.commit()
+            dynamicFragmentTransaction.replace(R.id.dynamic_container, DynamicFragment())
+            dynamicFragmentTransaction.commit()
 
+            /**
+             * ボタン押下によって、fragmentに遷移する処理
+             */
             button.setOnClickListener { v ->
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction =
-                    fragmentManager.beginTransaction()
+                // FragmentTransactionのインスタンスを取得
+                val switchFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
                 // BackStackを設定
-                fragmentTransaction.addToBackStack(null)
+                switchFragmentTransaction.addToBackStack(null)
 
                 // パラメータを設定
                 SwitchFragment.newInstance("Fragment")?.let {
-                    fragmentTransaction.replace(
+                    switchFragmentTransaction.replace(
                         R.id.switch_container,
                         it
                     )
                 }
-                fragmentTransaction.commit()
+                switchFragmentTransaction.commit()
             }
+            /**
+             * fragment間で遷移させるための処理
+             */
+            val fromToFragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            // counterをパラメータとして設定
+            var count: Int = 0
+            Fragment01.newInstance(count)
+                ?.let {
+                    fromToFragmentTransaction.replace(R.id.fromTo_fragments_container, it) }
+            // 張り付けを実行
+            fromToFragmentTransaction.commit()
         }
     }
 
