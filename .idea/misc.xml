@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/fragment_01.xml" value="0.19630192502532928" />
@@ -19,7 +20,11 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/fragment_switch.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_top.xml" value="0.18704710144927536" />
-        <entry key="app/src/main/res/menu/menu_main.xml" value="0.14010416666666667" />
+        <entry key="app/src/main/res/layout/layout_constraint.xml" value="0.23852386474609377" />
+        <entry key="app/src/main/res/layout/layout_top.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.18357086181640625" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

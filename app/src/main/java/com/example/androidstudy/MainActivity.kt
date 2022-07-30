@@ -2,9 +2,11 @@ package com.example.androidstudy
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidstudy.fragmentStudy.FragmentStudyActivity
+import com.example.androidstudy.layoutStudy.LayoutStudyActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(application, FragmentStudyActivity::class.java)
             startActivity(intent)
         }
+        val layoutButton: Button = findViewById(R.id.layoutButton)
+        layoutButton.setOnClickListener { v ->
+            Log.d("takashii","MainActivity.onCreate.serLisner")
+            val intent = Intent(application, LayoutStudyActivity::class.java)
+            startActivity(intent)
+        }
     }
-
 }
